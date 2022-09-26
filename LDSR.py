@@ -25,13 +25,16 @@ class LDSR:
         self.modelPath = modelPath
         self.yamlPath = yamlPath
 
-    def load_model_from_config(self):
+    def load_model_from_config(self, half_attention):
         pl_sd = torch.load(self.modelPath, map_location="cpu")
         sd = pl_sd["state_dict"]
         config = OmegaConf.load(self.yamlPath)
         model = instantiate_from_config(config.model)
         _, _ = model.load_state_dict(sd, strict=False)
         model.cuda()
+        if half_attention:
+            model = model.half()
+
         model.eval()
         return {"model": model}  # , global_step
 
@@ -184,7 +187,7 @@ class LDSR:
         return logs
 
     @torch.no_grad()
-    def super_resolution(self, image, steps=100, pre_down_scale='None', post_down_scale='None'):
+    def super_resolution(self, image, steps=100, pre_down_scale='None', post_down_scale='None', half_attention=False):
         pre_scale = 1
         if pre_down_scale == '1/4':
             pre_scale = 4
@@ -204,9 +207,9 @@ class LDSR:
         return self.superResolution(image, steps, pre_scale, post_scale)
 
     @torch.no_grad()
-    def superResolution(self, image, steps=100, pre_down_scale=1, post_down_scale=1):
+    def superResolution(self, image, steps=100, pre_down_scale=1, post_down_scale=1, half_attention=False):
         diffMode = 'superresolution'
-        model = self.load_model_from_config()
+        model = self.load_model_from_config(half_attention)
 
         # Run settings
         diffusion_steps = int(steps)  # @param [25, 50, 100, 250, 500, 1000]
