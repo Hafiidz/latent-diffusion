@@ -24,9 +24,11 @@
   <img src=https://user-images.githubusercontent.com/3688500/189252740-1aee29fb-7f2a-4873-90b7-74410a5277e8.png   />
 </div>
 
-7. _(Optional)_ If the two files are not there, you can manually download **LDSR** files here [project.yaml](https://heibox.uni-heidelberg.de/f/31a76b13ea27482981b4/?dl=1) and [model last.cpkt](https://heibox.uni-heidelberg.de/f/578df07c8fc04ffbadf3/?dl=1). 
-8. Rename last.ckpt to model.ckpt and place both under `stable-diffusion-webui/src/latent-diffusion/experiments/pretrained_models/`.
-9. Follow the discussion or raise a new issue [here](https://github.com/sd-webui/stable-diffusion-webui/issues/488). 
+7. _(Optional)_ If the two files are not there, you can manually download them:
+    1. Download [project.yaml](https://heibox.uni-heidelberg.de/f/31a76b13ea27482981b4/?dl=1) and [model last.cpkt](https://heibox.uni-heidelberg.de/f/578df07c8fc04ffbadf3/?dl=1). 
+    2. Rename `<date>-project.yaml` to `project.yaml` and `last.ckpt` to `model.ckpt`
+    3. Place both under `stable-diffusion-webui/src/latent-diffusion/experiments/pretrained_models/`
+8. Follow the discussion or raise a new issue [here](https://github.com/sd-webui/stable-diffusion-webui/issues/488). 
 
 
 # Link to Latent diffusion details
